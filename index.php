@@ -69,5 +69,10 @@ $pessoa->printNomeEIdade();
 $pessoa = new Pessoa('Luiz','22');
 $pessoa->printNomeEIdade();
 
+//interagindo com lista
+$lista = ['Guilherme','Luiz','Felipe'];
+echo $lista[0];
+echo $lista[1];
+
 
 ?>
