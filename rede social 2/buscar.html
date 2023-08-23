@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minha Rede Social - Ver Postagens</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function buscarPostagens() {
+            var termoBusca = $("#termo-busca").val();
+            
+            $.ajax({
+                url: "buscar.php",
+                method: "GET",
+                data: { busca: termoBusca },
+                success: function(data) {
+                    $("#postagens-container").html(data);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            buscarPostagens(); // Chama a função de busca ao carregar a página
+        });
+    </script>
+</head>
+<body>
+    <div class="painel">
+        <div class="cabecalho">
+            <h1>Minha Rede Social</h1>
+        </div>
+        <div class="conteudo">
+            <h2>Postagens</h2>
+            
+            <input type="text" id="termo-busca" placeholder="Buscar postagens...">
+            <button onclick="buscarPostagens()">Buscar</button>
+            
+            <div id="postagens-container">
+                <!-- As postagens serão carregadas aqui -->
+            </div>
+        </div>
+        <div class="menu-lateral">
+            <a href="index.html">Fazer Nova Postagem</a>
+        </div>
+    </div>
+</body>
+</html>
+

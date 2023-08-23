@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rede Social - Ver Postagens</title>
+    <title>Minha Rede Social - Ver Postagens</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
-    <h1>Rede Social</h1>
-    <h2>Postagens</h2>
-    
-    <?php
-    session_start();
-    
-    if (isset($_SESSION["postagens"]) && count($_SESSION["postagens"]) > 0) {
-        echo "<ul>";
-        foreach ($_SESSION["postagens"] as $postagem) {
-            echo "<li>$postagem</li>";
-        }
-        echo "</ul>";
-    } else {
-        echo "<p>Nenhuma postagem encontrada.</p>";
-    }
-    ?>
-    <a href="index.html">Fazer Nova Postagem</a>
+    <div class="painel">
+        <div class="cabecalho">
+            <h1>Minha Rede Social</h1>
+        </div>
+        <div class="conteudo">
+            <h2>Postagens</h2>
+            
+            <?php
+            // Obtém o nome do usuário a partir do cookie (se existir)
+            $nomeUsuario = isset($_COOKIE["nome_usuario"]) ? $_COOKIE["nome_usuario"] : "Anônimo";
+            
+            session_start();
+            
+            if (isset($_SESSION["postagens"]) && count($_SESSION["postagens"]) > 0) {
+                foreach ($_SESSION["postagens"] as $postagem) {
+                    echo '<div class="card">';
+                    echo "<strong>$nomeUsuario:</strong><br>";
+                    echo "$postagem";
+                    echo '</div>';
+                }
+            } else {
+                echo "<p>Nenhuma postagem encontrada.</p>";
+            }
+            ?>
+        </div>
+        <div class="menu-lateral">
+            <a href="index.html">Fazer Nova Postagem</a>
+        </div>
+    </div>
 </body>
 </html>
