@@ -11,6 +11,7 @@
             <h1>Rede Social</h1>
         </div>
         <div class="conteudo">
+            
             <h2>Processando Postagem</h2>
             
             <?php
@@ -33,6 +34,7 @@
                 
                 // Exibe mensagem de confirmação
                 echo "<p>Postagem realizada com sucesso!</p>";
+
             }
             ?>
             <!-- Link para ver as postagens -->

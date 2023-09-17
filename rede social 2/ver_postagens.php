@@ -19,11 +19,13 @@
             session_start();
             
             if (isset($_SESSION["postagens"]) && count($_SESSION["postagens"]) > 0) {
+
                 foreach ($_SESSION["postagens"] as $postagem) {
                     echo '<div class="card">';
                     echo "<strong>$nomeUsuario:</strong><br>";
                     echo "$postagem";
                     echo '</div>';
+                    
                 }
             } else {
                 echo "<p>Nenhuma postagem encontrada.</p>";

@@ -14,7 +14,7 @@ function calcularMedia($notas) {
 // Array de notas dos alunos
 $notas_aluno1 = array(9.5, 8.7, 7.8);
 $notas_aluno2 = array(6.5, 5.2, 4.9);
-$notas_aluno3 = array();
+$notas_aluno3 = array(); 
 
 // Calculando as médias
 $media_aluno1 = calcularMedia($notas_aluno1);
@@ -49,4 +49,22 @@ foreach ($alunos as $aluno => $media) {
         echo "$aluno foi reprovado.<br>";
     }
 }
+
+function calcularMedia($notas) {
+    $soma = 0;
+    $quantidade = count($notas);
+    
+    for ($i = 0; $i < $quantidade; $i++) {
+        $soma += $notas[$i];
+    }
+    
+    if ($quantidade > 0) {
+        return $soma / $quantidade;
+    } else {
+        return 0;
+    }
+}
 ?>
+
+
+
