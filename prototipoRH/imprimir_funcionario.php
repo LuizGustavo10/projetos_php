@@ -1,8 +1,19 @@
 <?php
-
 	//biblioteca fpdf
 	require 'lib/fpdf.php';
-	require 'conexao.php';
+// Conexão com o banco de dados (substitua pelos seus detalhes de conexão)
+$host = 'localhost';
+$usuario = 'root';
+$senha = '';
+$banco = 'localdb';
+
+$con = mysqli_connect($host, $usuario, $senha, $banco);
+
+// Verificar a conexão com o banco de dados
+if (!$con) {
+    die("Falha na conexão com o banco de dados: " . mysqli_connect_error());
+}
+
 	
 	//conectar ao banco
 	//mysql_query($con, "SET NAMES 'utf8'");
