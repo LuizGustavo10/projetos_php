@@ -7,7 +7,7 @@ Sistema em PHP para gerenciar recursos humanos de uma empresa ficticia
 
 Introdução
 
-	Sistema para gerenciamento de funcionarios da empresa 3LM. É possível inserir, alterar, excluir 
+	Sistema para gerenciamento de funcionarios. É possível inserir, alterar, excluir 
 	funcionarios. Também é possivel inserir, alterar, excluir funcoes
 
 *************************************************************************************************

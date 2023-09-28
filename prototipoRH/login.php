@@ -1,5 +1,3 @@
-
-
 <div style="width: 30%; margin-left: 30%; margin-top: 10%; margin-bottom: 5%;">
 	 
 <span>login:1</span><br/>

@@ -30,6 +30,12 @@ $fpdf->SetAutoPageBreak(true, 10);
 $fpdf->AliasNbPages();
 
 // Informações da empresa
+//largura - 0 automatico
+//altura - 5 milimetros
+//w3c info - Texto da celula
+//borda - 0 - sem borda
+// quebra de linha - 1
+//Alinhamento - L esquerda
 $fpdf->Cell(0, 5, "W3L - INFORMATICA", 0, 1, 'L');
 $fpdf->Cell(0, 5, "Rua Fulano de Tal, s/n, Bairro Industrial", 0, 1, 'L');
 

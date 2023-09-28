@@ -7,6 +7,7 @@
     <h1>Resultado da Média</h1>
 
     <?php
+
     // Recupere os valores das notas do formulário
     $nota1 = $_POST['nota1'];
     $nota2 = $_POST['nota2'];
