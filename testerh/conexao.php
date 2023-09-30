@@ -1,8 +1,8 @@
 <?php
 $enderecobd = "localhost";
-$dbname = "localhost";
+$dbname = "localdb";
 $usuariobd = "root";
-$senha = "";
+$senhabd = "";
 
 $con = mysqli_connect($enderecobd, $usuariobd, $senhabd, $dbname);
 
