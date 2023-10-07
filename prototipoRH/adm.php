@@ -180,7 +180,7 @@ if ( !isset($_SESSION['codigoUsuario']) and !isset($_SESSION['senhaUsuario']) ) 
                                     <td class="col-md-6"><?php echo $linha['nomeUsuario'];  ?></td>
 
                                     <td class="col-md-1">
-
+|
                                     </td>
 
 

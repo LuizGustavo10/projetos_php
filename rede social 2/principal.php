@@ -8,24 +8,22 @@
 </head>
 
 <body>
-    <canvas id="canvas"> </canvas>
-    <div class="painel">
-        <h1> Senac Connect - Projeto Chat em PHP com MySQL</h1>
-
-        <div class="chat">
-            <?php
-            session_start();
+    <?php
+     session_start(); 
 
             include "banco.php";
 
-
+            //Se for posst e se não tiver vazio
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['usuario'])) {
+                $_SESSION['usuario'] = $_POST['usuario'];
+            }
 
 
             //Se for posst e se não tiver vazio
             if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['mensagem'])) {
 
                 $mensagem = $conn->real_escape_string($_POST['mensagem']);
-                $usuario = $_SESSION['usuario'] ?? 'Anônimo';
+                $usuario = $_SESSION['usuario'] ? $_SESSION['usuario']:  'Anônimo';
 
                 $sql = "INSERT INTO tabela_mensagens (usuario, mensagem) VALUES ('$usuario', '$mensagem')";
 
@@ -33,14 +31,6 @@
                     echo "Erro ao inserir mensagem: " . $conn->error;
                 }
             }
-
-
-
-            //Se for posst e se não tiver vazio
-            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['usuario'])) {
-                $_SESSION['usuario'] = $_POST['usuario'];
-            }
-
 
 
             // Se for POST e não estiver vazio, exclusão da mensagem
@@ -78,11 +68,16 @@
 
 
 
+    ?>
+    <canvas id="canvas"> </canvas>
+    <div class="painel">
+        <h1> Senac Connect - Projeto Chat em PHP com MySQL</h1>
+
+        <div class="chat">
+            <?php
 
             $sql = "SELECT usuario, mensagem, id FROM tabela_mensagens";
             $resultado = $conn->query($sql);
-
-
 
 
             if ($resultado->num_rows > 0) {

@@ -9,6 +9,7 @@
        if ($conn->connect_error) {
            die("Conexão com o banco de dados falhou: " . $conn->connect_error);
        }
+       
     //    CREATE TABLE tabela_mensagens (
     //      id INT AUTO_INCREMENT PRIMARY KEY,
     //      usuario VARCHAR(255) NOT NULL,

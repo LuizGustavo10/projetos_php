@@ -12,7 +12,7 @@
 
   
 	//query para atualizar o dado
-	$query = "UPDATE tusuario SET nomeUsuario='".$nomeUsuario."', codigoUsuario='".$codigoUsuario."', senhaUsuario='".$senhaUsuario."' where codigoUsuario='".$codigoUsuario."'";
+	$query = "UPDATE tusuario SET nomeUsuario='$nomeUsuario', codigoUsuario='$codigoUsuario', senhaUsuario='$senhaUsuario' where codigoUsuario='$codigoUsuario'";
 	$resultado = mysqli_query($con, $query) or die ("2-erro em ATUALIZAR o banco!");
 
 	header('Location:adm.php');
