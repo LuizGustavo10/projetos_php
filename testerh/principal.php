@@ -3,7 +3,7 @@ session_start();
 include 'conexao.php';
 
 
-$destino = "inserir_usuario.php";
+$destino = "inserirUsuario.php";
 $tituloFormulario = "Incluir Usuário";
 
 //Senão tiver autenticado manda pro login
@@ -15,9 +15,9 @@ if (!isset($_SESSION['codigoUsuario']) and !isset($_SESSION['senhaUsuario'])) {
     header('location:index.php');
 }
 
-if(!empty($_GET['codigoAltUsuario'])){
+if (!empty($_GET['codigoAltUsuario'])) {
     $id = $_GET['codigoAltUsuario'];
-    $query = "SELECT * FROM tusuario WHERE codigoUsuario=".$id;
+    $query = "SELECT * FROM tusuario WHERE codigoUsuario=" . $id;
     $dados = mysqli_query($con, $query);
     $usuario = mysqli_fetch_assoc($dados);
 
@@ -40,44 +40,61 @@ if(!empty($_GET['codigoAltUsuario'])){
 
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 
-
+    
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <i class="fa-brands fa-phoenix-squadron" style="color: #ff8800; font-size: 40px; margin-right: 7px;"></i>
         <a class="navbar-brand" href="#">Sistema RH</a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(Página atual)</span></a>
-                <a class="nav-item nav-link" href="#">Destaques</a>
-                <a class="nav-item nav-link" href="#">Preços</a>
-                <a class="nav-item nav-link disabled" href="#">Desativado</a>
+                <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          opções
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="principal.php">Principal</a>
+          <a class="dropdown-item" href="funcao.php">Função</a>
+          <a class="dropdown-item" href="funcionario.php">Funcionário</a>
+          <a class="dropdown-item" href="sair.php">Sair</a>
+         
+        </div>
+      </li>
             </div>
         </div>
     </nav>
 
     <div class="container-fluid">
+
         <div class="row">
             <div class="col-md-3 menu">
-                <ul class="list-group">
-                    <li class="list-group-item"><a href="principal.php"> Usuários </a></li>
-                    <li class="list-group-item"><a href="funcao.php"> Funções </a></li>
-                    <li class="list-group-item"><a href="funcionario.php"> Funcionários </a></li>
-                    <li class="list-group-item"><a href="sair.php"> Sair </a></li>
+  
 
-                </ul>
+               
+                    <ul  class="menu">
+                        <li><a href="principal.php" class="menu-item"> <i class="fa-solid fa-user-tie"></i> Usuários </a></li>
+                        <li><a href="funcao.php" class="menu-item"><i class="fa-solid fa-briefcase"></i> Funções</a></li>
+                        <li><a href="funcionario.php" class="menu-item"> <i class="fa-solid fa-people-group"></i> Funcionários</a></li>
+                        <li><a href="sair.php" class="menu-item"><i class="fa-solid fa-right-from-bracket"></i> Sair</a></li>
+                    </ul>
+              
             </div>
             <div class="col-md-9">
 
 
                 <div class="row">
                     <div class="col-md-4 card">
-                        <form action="inserirUsuario.php" method="POST">
-                            <h1> Seja Bem Vindo <?php echo $_SESSION['usuarioLogado']; ?></h1>
+                        <form action="<?= $destino; ?>" method="POST">
+                            <h1> Bem Vindo <?php echo $_SESSION['usuarioLogado']; ?> 😁</h1>
 
                             <div class="form-group">
                                 <label for="codigoUsuario">Matriculo - codUsuario</label>
@@ -101,11 +118,12 @@ if(!empty($_GET['codigoAltUsuario'])){
 
                         </form>
                     </div>
-                    <div class="col-md-4 card">
-                        <table class="table table-hover">
+                    <div class="col-md-5 card">
+                        <table class="table table-hover" id="tabela">
                             <thead>
                                 <tr>
                                     <th scope="col" class="col-8">Usuário</th>
+                                    <th scope="col" class="col-8">Matrícula</th>
                                     <th scope="col">Alterar</th>
                                     <th scope="col">Excluir</th>
                                 </tr>
@@ -121,8 +139,9 @@ if(!empty($_GET['codigoAltUsuario'])){
 
                                     <tr>
                                         <td> <?php echo $linha['nomeUsuario']; ?> </td>
-                                        <td> <a  href="principal.php?codigoAltUsuario=<?=$linha['codigoUsuario']; ?>"> Editar </a> </td>
-                                        <td> <a href="<?php echo "excluirUsuario.php?codigoUsuario=".$linha['codigoUsuario']; ?>">Excluir </a></td>
+                                        <td> <?php echo $linha['codigoUsuario']; ?> </td>
+                                        <td> <a href="principal.php?codigoAltUsuario=<?= $linha['codigoUsuario']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
+                                        <td> <a href="<?php echo "excluirUsuario.php?codigoUsuario=" . $linha['codigoUsuario']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
                                     </tr>
 
                                 <?php  } ?>
@@ -141,7 +160,12 @@ if(!empty($_GET['codigoAltUsuario'])){
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js" integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+<script src="css/script.js"></script>
+
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>

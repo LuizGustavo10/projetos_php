@@ -19,7 +19,47 @@
     transition: 2s;
 }
 
-.menu{
-    background-color: rgb(7, 172, 205);
-    height:100vh;
+
+
+/* Estilos para o menu lateral */
+.menu {
+    min-width: 250px;
+    background-color: #333;
+    color: #fff;
+    height: 100vh; /* Altura 100% da viewport */
+    list-style: none;
+    
+    
+}
+
+/* Estilos para os itens do menu */
+.menu-item {
+    display: block;
+    padding: 10px 20px;
+    margin-left: -50px;
+    font-style: none;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid white;
+   margin-top: 10px;
+   border-radius: 10px;
+  
+   
+}
+
+/* Estilos para o item selecionado */
+.menu-item:hover {
+    background-color: rgb(255, 102, 0);
+    border-radius: 10px;
+    color: white;
+    transition: 1s;
+    text-decoration: none;
+    font-size: 20px;
+    
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+    }
 }
