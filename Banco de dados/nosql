@@ -1,0 +1,104 @@
+const MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+
+// Conecte-se ao servidor MongoDB
+MongoClient.connect(url, function(err, client) {
+    if (err) throw err;
+
+    // Selecione o banco de dados
+    const db = client.db('exemplo');
+
+    // Crie uma coleção para "autores"
+    db.createCollection('autores', function(err, res) {
+        if (err) throw err;
+
+        console.log('Coleção "autores" criada com sucesso!');
+
+        // Coleção "autores"
+        const autoresCollection = db.collection('autores');
+
+        // Documento de exemplo para inserção de autor
+        const autorExemplo = {
+            "nome": "J.R.R. Tolkien",
+            "nacionalidade": "Inglaterra"
+        };
+
+        // Insira o documento do autor
+        autoresCollection.insertOne(autorExemplo, function(err, autorInserido) {
+            if (err) throw err;
+
+            console.log('Autor inserido com sucesso na coleção "autores"!');
+
+            // Agora, crie uma coleção para "livros"
+            db.createCollection('livros', function(err, res) {
+                if (err) throw err;
+
+                console.log('Coleção "livros" criada com sucesso!');
+
+                // Coleção "livros"
+                const livrosCollection = db.collection('livros');
+
+                // Documento de exemplo para inserção de livro com referência ao autor
+                const livroExemplo = {
+                    "titulo": "O Senhor dos Anéis",
+                    "autor_id": autorInserido.ops[0]._id, // Referência ao ID do autor
+                    "ano_publicacao": 1954
+                };
+
+                // Insira o documento do livro
+                livrosCollection.insertOne(livroExemplo, function(err, livroInserido) {
+                    if (err) throw err;
+
+                    console.log('Livro inserido com sucesso na coleção "livros"!');
+                    client.close();
+                });
+            });
+        });
+    });
+});
+
+
+
+onst MongoClient = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+
+// Conecte-se ao servidor MongoDB
+MongoClient.connect(url, function(err, client) {
+    if (err) throw err;
+
+    // Selecione o banco de dados
+    const db = client.db('exemplo');
+
+    // Crie uma coleção (tabela) chamada "livros"
+    db.createCollection('livros', function(err, res) {
+        if (err) throw err;
+
+        console.log('Coleção "livros" criada com sucesso!');
+
+        // Coleção "livros"
+        const livrosCollection = db.collection('livros');
+
+        // Documento de exemplo para inserção de livro com referência ao autor
+        const livroExemplo = {
+            "titulo": "O Senhor dos Anéis",
+            "autor_id": autorInserido.ops[0]._id, // Referência ao ID do autor
+            "ano_publicacao": 1954
+        };
+
+        // Insira o documento do livro
+        livrosCollection.insertOne(livroExemplo, function(err, livroInserido) {
+            if (err) throw err;
+
+            console.log('Livro inserido com sucesso na coleção "livros"!');
+
+            // Consulte e exiba todos os registros na coleção "livros"
+            livrosCollection.find({}).toArray(function(err, livros) {
+                if (err) throw err;
+
+                console.log('Registros na coleção "livros":');
+                console.log(livros);
+                client.close();
+            });
+        });
+    });
+});

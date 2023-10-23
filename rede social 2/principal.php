@@ -85,8 +85,6 @@
                     echo '<div class="mensagens">';
                     echo "<p><strong>{$linha['usuario']}:</strong> {$linha['mensagem']}</p>";
 
-
-
                     // Adicione um formulário para ação de exclusão da mensagem
                     echo '<form method="post" action="">';
                     echo "<input type='hidden' name='mensagem_id' value='{$linha['id']}' />";

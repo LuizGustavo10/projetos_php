@@ -4,20 +4,21 @@ include 'conexao.php';
 include 'validaAutenticacao.php';
 
 
-$destino = "./usuario/inserirUsuario.php";
-$tituloFormulario = "Incluir Usuário";
+$destino = "./funcionario/inserirFuncionario.php";
+$tituloFormulario = "Incluir Funcionário";
 
 
-if (!empty($_GET['codigoAltUsuario'])) {
-    $id = $_GET['codigoAltUsuario'];
-    $query = "SELECT * FROM tusuario WHERE codigoUsuario=" . $id;
+if (!empty($_GET['codigoAltFuncionario'])) {
+    $id = $_GET['codigoAltFuncionario'];
+    $query = "SELECT * FROM tfuncionario WHERE codigoFuncionario=" . $id;
     $dados = mysqli_query($con, $query);
-    $usuario = mysqli_fetch_assoc($dados);
+    $funcionario = mysqli_fetch_assoc($dados);
 
-    $destino = "./usuario/alterarUsuario.php";
-    $tituloformulario = "Alterar Usuario";
+    $destino = "./funcionario/alterarFuncionario.php";
+    $tituloformulario = "Alterar Funcionario";
+
+    $oculto = '<input type="hidden" name="codigoFuncionario" value="'.$id.'"/>';
 }
-
 
 
 ?>
@@ -40,79 +41,108 @@ if (!empty($_GET['codigoAltUsuario'])) {
 </head>
 
 <body>
-    <?php include 'nav.php'; ?>
+
+  <?php include 'nav.php'; ?>
 
     <div class="container-fluid">
 
         <div class="row">
-
             <div class="col-md-3 menu">
+               
                 <?php include 'menu.php' ?>
+              
             </div>
-
             <div class="col-md-9">
 
 
                 <div class="row">
+
                     <div class="col-md-4 card">
                         <form action="<?= $destino; ?>" method="POST">
-                            <h1> Bem Vindo <?php echo $_SESSION['usuarioLogado']; ?> 😁</h1>
+                            <h1>Cadastro de Funcionários</h1>
 
                             <div class="form-group">
-                                <label for="codigoUsuario">Matriculo - codUsuario</label>
-                                <input name="codigoUsuario" type="text" class="form-control" id="codigoUsuario" value="<?php echo isset($usuario) ? $usuario['codigoUsuario'] : "" ?>">
-                            </div>
- 
+                                <label for="nomeFuncionario">Nome do Funcionário</label>
 
-                            <div class="form-group">
-                                <label for="nomeUsuario">Nome Usuário</label>
-                                <input name="nomeUsuario" type="text" class="form-control" id="nomeUsuario" value="<?php echo isset($usuario) ? $usuario['nomeUsuario'] : "" ?>">
+                                <input name="nomeFuncionario" type="text" class="form-control" id="nomeFuncionario" 
+                                value="<?php echo isset($funcionario) ? $funcionario['nomeFuncionario'] : ""; ?>">
                             </div>
 
                             <div class="form-group">
-                                <label for="senhaUsuario">Senha Usuário</label>
-                                <input name="senhaUsuario" type="password" class="form-control" id="senhaUsuario" value="<?php echo isset($usuario) ? $usuario['senhaUsuario'] : "" ?>">
+                                <label for="nomeFuncionario"> Nome do Funcionário </label>
+                                <select class="form-control">
+                                    <option value="">Selecione</option>
+
+                                    <?php
+                                        $query = "SELECT * FROM tfuncoes";
+                                        $dados = mysqli_query($con, $query);
+                                        echo $funcionario['funcao'];
+
+                                        while($linha = mysqli_fetch_assoc($dados)){
+                                            echo "<option value='".$linha['codigoFuncao']."' >" .$linha['descricaoFuncao']. "</option>";
+                                        }
+                                    ?>
+
+                                </select>
+
                             </div>
 
 
+                            <div class="form-group">
+                                <label for="salario"> Salário </label>
+                                <input name="salario" type="text" class="form-control" id="salario" 
+                                value="<?php echo isset($funcionario) ? $funcionario['salario'] : ""; ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="codigoFuncionario"> Matricula do Funcionario </label>
+                                <input name="codigoFuncionario" type="text" class="form-control" id="codigoFuncionario" 
+                                value="<?php echo isset($funcionario) ? $funcionario['codigoFuncionario'] : ""; ?>">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="dataNascimento">Data de Nascimento </label>
+                                <input name="dataNascimento" type="date" class="form-control" id="dataNascimento" 
+                                value="<?php echo isset($funcionario) ? $funcionario['dataNascimento'] : ""; ?>">
+                            </div>
 
                             <button name="enviar" type="submit" class="btn btn-primary">Enviar</button>
-
                         </form>
                     </div>
+
                     <div class="col-md-5 card">
+
                         <table class="table table-hover" id="tabela">
+
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-8">Usuário</th>
-                                    <th scope="col" class="col-8">Matrícula</th>
+                                    <th scope="col" class="col-8">Funcionário</th>
                                     <th scope="col">Alterar</th>
                                     <th scope="col">Excluir</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 <!-- listando todos usuario -->
                                 <?php
-                                $query = "SELECT * FROM tusuario";
+                                $query = "SELECT * FROM tfuncionario";
                                 $dados = mysqli_query($con, $query);
 
                                 while ($linha = mysqli_fetch_assoc($dados)) {
                                 ?>
 
                                     <tr>
-                                        <td> <?php echo $linha['nomeUsuario']; ?> </td>
-                                        <td> <?php echo $linha['codigoUsuario']; ?> </td>
-                                        <td> <a href="principal.php?codigoAltUsuario=<?= $linha['codigoUsuario']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
-                                        <td> <a href="<?php echo "./usuario/excluirUsuario.php?codigoUsuario=" . $linha['codigoUsuario']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
+                                        <td> <?php echo $linha['nomeFuncionario']; ?> </td>
+                                        <td> <a href="funcionario.php?codigoAltFuncionario=<?= $linha['codigoFuncionario']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
+                                        <td> <a href="<?php echo "./funcionario/excluirFuncionario.php?codigoFuncionario=" . $linha['codigoFuncionario']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
                                     </tr>
 
                                 <?php  } ?>
 
-
                             </tbody>
+
                         </table>
                     </div>
-
 
                 </div>
 

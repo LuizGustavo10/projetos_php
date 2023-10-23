@@ -138,14 +138,14 @@ if(!empty($_GET['codigoAltFuncionario'])){
 							  	<select name="funcao" class="form-control">
 							  		<option value="">Selecione</option>
 							  		<?php
-                        	  $query = "select * from tfuncoes";
-                      			$dados = mysqli_query($con, $query);
-                            echo $funcionario['funcao']; 
-                            //exibir select
-										        while($linha = mysqli_fetch_assoc($dados)){
-	                        			echo "<option value='".$linha['codigoFuncao']."'>".$linha['descricaoFuncao']."</option>";
-                      		  }
-                		?>
+										$query = "select * from tfuncoes";
+										$dados = mysqli_query($con, $query);
+										echo $funcionario['funcao']; 
+										//exibir select
+										while($linha = mysqli_fetch_assoc($dados)){
+											echo "<option value='".$linha['codigoFuncao']."'>".$linha['descricaoFuncao']."</option>";
+										}
+                					?>
 
 
 							  	</select>

@@ -16,4 +16,5 @@
     //      mensagem TEXT NOT NULL,
     //      data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     //  );
+    
 ?>
