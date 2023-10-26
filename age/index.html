@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulário de Agendamento</title>
+</head>
+<body>
+    <h1>Formulário de Agendamento</h1>
+    <form method="post" action="processa_agendamento.php">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" required><br>
+
+        <label for="data_inicio">Data de Início:</label>
+        <input type="date" name="data_inicio" required><br>
+
+        <label for="data_fim">Data de Término:</label>
+        <input type="date" name="data_fim" required><br>
+
+        <label for="hora_inicio">Hora de Início:</label>
+        <input type="time" name="hora_inicio" required><br>
+
+        <label for="hora_fim">Hora de Término:</label>
+        <input type="time" name="hora_fim" required><br>
+
+        <label for="dias_semana[]">Dias da Semana:</label><br>
+        <input type="checkbox" name="dias_semana[]" value="sunday"> Domingo
+        <input type="checkbox" name="dias_semana[]" value="monday"> Segunda-feira
+        <input type="checkbox" name="dias_semana[]" value="tuesday"> Terça-feira
+        <input type="checkbox" name="dias_semana[]" value="wednesday"> Quarta-feira
+        <input type="checkbox" name="dias_semana[]" value="thursday"> Quinta-feira
+        <input type="checkbox" name="dias_semana[]" value="friday"> Sexta-feira
+        <input type="checkbox" name="dias_semana[]" value="saturday"> Sábado<br>
+
+        <input type="submit" value="Agendar">
+    </form>
+</body>
+</html>

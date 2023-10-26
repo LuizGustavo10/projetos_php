@@ -14,13 +14,12 @@
 </head>
 <body class="fundo">
 
-
-
     
 <div class="painel animate__animated animate__flipInX">
 
 <i class="fa-solid fa-user usuario"></i>
-<h1 style="text-align: center">Sistema RH</h1>
+
+<h1 style="text-align: center"> Sistema RH </h1>
 
 
 
@@ -31,7 +30,7 @@
     <input name="codigoUsuario" type="text" class="form-control" id="matricula" aria-describedby="emailHelp" placeholder="Seu email">
    
  
-</div>
+  </div>
 
   <div class="form-group">
     <label for="senha">Senha</label>
