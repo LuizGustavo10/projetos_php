@@ -52,4 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $conexao->close();
     echo "Agendamento(s) criado(s) com sucesso!";
 }
+
+?>
+
 ?>

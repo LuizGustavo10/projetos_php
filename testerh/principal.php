@@ -54,7 +54,7 @@ if (!empty($_GET['codigoAltUsuario'])) {
 
 
                 <div class="row">
-                    <div class="col-md-4 card">
+                    <div class="col-md card">
                         <form action="<?= $destino; ?>" method="POST">
                             <h1> Bem Vindo <?php echo $_SESSION['usuarioLogado']; ?> 😁</h1>
 
@@ -80,7 +80,7 @@ if (!empty($_GET['codigoAltUsuario'])) {
 
                         </form>
                     </div>
-                    <div class="col-md-5 card">
+                    <div class="col-md card">
                         <table class="table table-hover" id="tabela">
                             <thead>
                                 <tr>

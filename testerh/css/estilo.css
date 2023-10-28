@@ -23,12 +23,11 @@
     border-radius: 10px;
     margin: 10px;
 }
+
 .card:hover{
     background-color: rgb(233, 233, 233);
     transition: 2s;
 }
-
-
 
 /* Estilos para o menu lateral */
 .menu {
@@ -64,7 +63,6 @@
     transition: 1s;
     text-decoration: none;
     font-size: 20px;
-    
 }
 
 @media (max-width: 768px) {
