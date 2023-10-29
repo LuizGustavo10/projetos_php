@@ -10,7 +10,7 @@ $tituloFormulario = "Incluir Funcionário";
 
 if (!empty($_GET['codigoAltFuncionario'])) {
     $id = $_GET['codigoAltFuncionario'];
-    $query = "SELECT * FROM funcionario WHERE codigo=" . $id;
+    $query = "SELECT * FROM funcionario WHERE id=" . $id;
     $dados = mysqli_query($con, $query);
     $funcionario = mysqli_fetch_assoc($dados);
 
@@ -57,29 +57,34 @@ if (!empty($_GET['codigoAltFuncionario'])) {
 
                 <div class="row">
 
-                    <div class="col-md-4 card">
+                    <div class="col-md-5 card">
                         <form action="<?= $destino; ?>" method="POST">
-                            <h1>Cadastro de Funcionários</h1>
+                            <h3>Cadastro de Funcionários</h3>
 
                             <div class="form-group">
-                                <label for="nomeFuncionario">Nome do Funcionário</label>
-
-                                <input name="nomeFuncionario" type="text" class="form-control" id="nomeFuncionario" 
-                                value="<?php echo isset($funcionario) ? $funcionario['nomeFuncionario'] : ""; ?>">
+                                <label>ID</label>
+                                <input disabled name="id" type="text" class="form-control"
+                                value="<?php echo isset($funcionario) ? $funcionario['id'] : ""; ?>">
                             </div>
 
                             <div class="form-group">
-                                <label for="nomeFuncionario"> Nome do Funcionário </label>
-                                <select class="form-control">
-                                    <option value="">Selecione</option>
+                                <label>Nome do Funcionário</label>
+                                <input name="nome" type="text" class="form-control"
+                                value="<?php echo isset($funcionario) ? $funcionario['nome'] : ""; ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label> Nome da profissão </label>
+                                <select class="form-control" name="funcao">
+                                <option value="">Selecione</option>
 
                                     <?php
-                                        $query = "SELECT * FROM tfuncoes";
+                                        $query = "SELECT * FROM funcoes";
                                         $dados = mysqli_query($con, $query);
                                         echo $funcionario['funcao'];
 
                                         while($linha = mysqli_fetch_assoc($dados)){
-                                            echo "<option value='".$linha['codigoFuncao']."' >" .$linha['descricaoFuncao']. "</option>";
+                                            echo "<option value='".$linha['codigo']."' >" .$linha['descricao']. "</option>";
                                         }
                                     ?>
 
@@ -89,21 +94,33 @@ if (!empty($_GET['codigoAltFuncionario'])) {
 
 
                             <div class="form-group">
-                                <label for="salario"> Salário </label>
-                                <input name="salario" type="text" class="form-control" id="salario" 
+                                <label> Salário </label>
+                                <input name="salario" type="text" class="form-control"
                                 value="<?php echo isset($funcionario) ? $funcionario['salario'] : ""; ?>">
                             </div>
 
                             <div class="form-group">
-                                <label for="codigoFuncionario"> Matricula do Funcionario </label>
-                                <input name="codigoFuncionario" type="text" class="form-control" id="codigoFuncionario" 
-                                value="<?php echo isset($funcionario) ? $funcionario['codigoFuncionario'] : ""; ?>">
+                                <label> Matricula do Funcionario </label>
+                                <input name="codigo" type="text" class="form-control" 
+                                value="<?php echo isset($funcionario) ? $funcionario['codigo'] : ""; ?>">
                             </div>
                             
                             <div class="form-group">
-                                <label for="dataNascimento">Data de Nascimento </label>
-                                <input name="dataNascimento" type="date" class="form-control" id="dataNascimento" 
+                                <label>Data de Nascimento </label>
+                                <input name="dataNascimento" type="date" class="form-control"
                                 value="<?php echo isset($funcionario) ? $funcionario['dataNascimento'] : ""; ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label>cpf </label>
+                                <input name="cpf" type="text" class="form-control"
+                                value="<?php echo isset($funcionario) ? $funcionario['cpf'] : ""; ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Data de Nascimento </label>
+                                <input name="senha" type="text" class="form-control"
+                                value="<?php echo isset($funcionario) ? $funcionario['senha'] : ""; ?>">
                             </div>
 
                             <button name="enviar" type="submit" class="btn btn-primary">Enviar</button>
@@ -132,9 +149,9 @@ if (!empty($_GET['codigoAltFuncionario'])) {
                                 ?>
 
                                     <tr>
-                                        <td> <?php echo $linha['nomeFuncionario']; ?> </td>
-                                        <td> <a href="funcionario.php?codigoAltFuncionario=<?= $linha['codigoFuncionario']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
-                                        <td> <a href="<?php echo "./funcionario/excluirFuncionario.php?codigoFuncionario=" . $linha['codigoFuncionario']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
+                                        <td> <?php echo $linha['nome']; ?> </td>
+                                        <td> <a href="funcionario.php?codigoAltFuncionario=<?= $linha['id']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
+                                        <td> <a href="<?php echo "./funcionario/excluirFuncionario.php?id=" . $linha['id']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
                                     </tr>
 
                                 <?php  } ?>

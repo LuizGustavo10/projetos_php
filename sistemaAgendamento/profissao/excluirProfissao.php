@@ -4,10 +4,10 @@
     include '../conexao.php';
     
     //dados do cliente a ser inserido 
-	$codigo		=	$_REQUEST['codigoFuncao'];
+	$id		=	$_REQUEST['id'];
 	
 	//query
-	$query = "DELETE FROM tfuncoes WHERE tfuncoes.codigoFuncao=".$codigo;
+	$query = "DELETE FROM funcoes WHERE id=".$id;
 
 	$resultado = mysqli_query($con, $query) or die ("erro em excluir dado no banco!");
 	header('Location:../profissao.php');

@@ -10,7 +10,7 @@ $tituloFormulario = "Incluir Usuário";
 
 if (!empty($_GET['codigoAltUsuario'])) {
     $id = $_GET['codigoAltUsuario'];
-    $query = "SELECT * FROM usuario WHERE codigo=" . $id;
+    $query = "SELECT * FROM usuario WHERE id=" . $id;
     $dados = mysqli_query($con, $query);
     $usuario = mysqli_fetch_assoc($dados);
 
@@ -59,19 +59,29 @@ if (!empty($_GET['codigoAltUsuario'])) {
                             <h1> Bem Vindo <?php echo $_SESSION['usuarioLogado']; ?> 😁</h1>
 
                             <div class="form-group">
-                                <label for="codigoUsuario">Matriculo - codUsuario</label>
-                                <input name="codigoUsuario" type="text" class="form-control" id="codigoUsuario" value="<?php echo isset($usuario) ? $usuario['codigoUsuario'] : "" ?>">
+                                <label>Id </label>
+                                <input disabled name="id" type="text" class="form-control" value="<?php echo isset($usuario) ? $usuario['id'] : "" ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Matriculo - codUsuario</label>
+                                <input name="codigo" type="text" class="form-control" value="<?php echo isset($usuario) ? $usuario['codigo'] : "" ?>">
                             </div>
  
 
                             <div class="form-group">
-                                <label for="nomeUsuario">Nome Usuário</label>
-                                <input name="nomeUsuario" type="text" class="form-control" id="nomeUsuario" value="<?php echo isset($usuario) ? $usuario['nomeUsuario'] : "" ?>">
+                                <label>Nome Usuário</label>
+                                <input name="nome" type="text" class="form-control" value="<?php echo isset($usuario) ? $usuario['nome'] : "" ?>">
                             </div>
 
                             <div class="form-group">
-                                <label for="senhaUsuario">Senha Usuário</label>
-                                <input name="senhaUsuario" type="password" class="form-control" id="senhaUsuario" value="<?php echo isset($usuario) ? $usuario['senhaUsuario'] : "" ?>">
+                                <label>CPF</label>
+                                <input name="cpf" type="text" class="form-control" value="<?php echo isset($usuario) ? $usuario['cpf'] : "" ?>">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Senha Usuário</label>
+                                <input name="senha" type="password" class="form-control" value="<?php echo isset($usuario) ? $usuario['senha'] : "" ?>">
                             </div>
 
 
@@ -84,6 +94,7 @@ if (!empty($_GET['codigoAltUsuario'])) {
                         <table class="table table-hover" id="tabela">
                             <thead>
                                 <tr>
+                                    <th scope="col" class="col-8">Usuário</th>
                                     <th scope="col" class="col-8">Usuário</th>
                                     <th scope="col" class="col-8">Matrícula</th>
                                     <th scope="col">Alterar</th>
@@ -100,14 +111,15 @@ if (!empty($_GET['codigoAltUsuario'])) {
                                 ?>
 
                                     <tr>
-                                        <td> <?php echo $linha['nomeUsuario']; ?> </td>
-                                        <td> <?php echo $linha['codigoUsuario']; ?> </td>
-                                        <td> <a href="principal.php?codigoAltUsuario=<?= $linha['codigoUsuario']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
-                                        <td> <a href="<?php echo "./usuario/excluirUsuario.php?codigoUsuario=" . $linha['codigoUsuario']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
+                                        <td> <?php echo $linha['id']; ?> </td>
+                                        <td> <?php echo $linha['nome']; ?> </td>
+                                        <td> <?php echo $linha['codigo']; ?> </td>
+                                        <td> <a href="principal.php?codigoAltUsuario=<?= $linha['id']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
+                                        <td> <a href="<?php echo "./usuario/excluirUsuario.php?id=" . $linha['id']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
                                     </tr>
 
                                 <?php  } ?>
-
+ 
 
                             </tbody>
                         </table>

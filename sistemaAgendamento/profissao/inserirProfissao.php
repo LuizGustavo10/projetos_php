@@ -3,13 +3,14 @@
     include '../conexao.php';
     
     //dados do filme a ser inserido
-    $codigoFuncao			=	$_REQUEST['codigoFuncao'];
-    $descricaoFuncao 		=	$_REQUEST['descricaoFuncao'];
+    $id                      = $_REQUEST['id'];
+    $codigo     			=	$_REQUEST['codigo'];
+    $descricao       		=	$_REQUEST['descricao'];
 
 	
 	//query
-$query = "INSERT INTO localdb.tfuncoes (codigoFuncao, descricaoFuncao)
-VALUES ('$codigoFuncao', '$descricaoFuncao')";
+    $query = "INSERT INTO funcoes (codigo, descricao)
+    VALUES ('$codigo', '$descricao')";
 	
 		
 	$resultado = mysqli_query($con, $query) or die ("erro em inserir no banco!!!");	

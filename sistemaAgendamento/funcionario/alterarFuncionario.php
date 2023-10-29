@@ -2,28 +2,27 @@
 
 include '../conexao.php';
 
-if(isset($_REQUEST['codigoFuncionario'])){
+if (isset($_REQUEST['codigo'])) {
 
-    $nomeFuncionario 	 		 =	$_REQUEST['nomeFuncionario'];
-    $codigoFuncionario	 	 =	$_REQUEST['codigoFuncionario'];
-    $salario							 =	$_REQUEST['salario'];
-    $dataNascimento				 =	$_REQUEST['dataNascimento'];
-    $funcao								 =	$_REQUEST['funcao'];
+    $id                  =    $_REQUEST['id'];
+    $nome                =    $_REQUEST['nome'];
+    $codigo              =    $_REQUEST['codigo'];
+    $salario             =    $_REQUEST['salario'];
+    $dataNascimento      = $_REQUEST['dataNascimento'];
+    $funcao              =    $_REQUEST['funcao'];
+    $cpf                 =    $_REQUEST['cpf'];
+    $senha               =    $_REQUEST['senha'];
 
-    $query = "UPDATE tfuncionario SET
-    codigo = '$codigoFuncionario',
-    nome = '$nomeFuncionario',
+    $query = "UPDATE funcionario SET
+    codigo = '$codigo',
+    nome = '$nome',
     salario = '$salario',
     dataNascimento = '$dataNascimento',
     funcao = '$funcao'
-    WHERE codigoFuncionario = '$codigoFuncionario'";
+    WHERE codigo = '$codigo'";
 
-    $resultado = mysqli_query($con, $query) or die ("Erro em atualizar em banco!");
+    $resultado = mysqli_query($con, $query) or die("Erro em atualizar em banco!");
     header('Location:../funcionario.php');
-}else{
+} else {
     header('Location:../funcionario.php');
 }
-
-
-
-?>

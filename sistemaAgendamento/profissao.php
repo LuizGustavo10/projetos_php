@@ -10,7 +10,7 @@ $tituloFormulario = "Incluir Profissão";
 
 if (!empty($_GET['codigoAltProfissao'])) {
     $id = $_GET['codigoAltProfissao'];
-    $query = "SELECT * FROM funcoes WHERE codigo=" . $id;
+    $query = "SELECT * FROM funcoes WHERE id=" . $id;
     $dados = mysqli_query($con, $query);
     $funcao = mysqli_fetch_assoc($dados);
 
@@ -60,15 +60,25 @@ if (!empty($_GET['codigoAltProfissao'])) {
                             <h1>Cadastro de Profissões</h1>
 
                             <div class="form-group">
-                                <label for="codigoFuncao">Matriculo - codUsuario</label>
-                                <input name="codigoFuncao" type="text" class="form-control" id="codigoFuncao" value="<?php echo isset($funcao) ? $funcao['codigoFuncao'] : "" ?>">
+                                <label >ID</label>
+                                <input disabled name="id" type="hidden" class="form-control" 
+                                value="<?php echo isset($funcao) ? $funcao['id'] : "" ?>">
                             </div>
  
 
                             <div class="form-group">
-                                <label for="descricaoFuncao">Descrição Função</label>
-                                <input name="descricaoFuncao" type="text" class="form-control" id="descricaoFuncao" value="<?php echo isset($funcao) ? $funcao['descricaoFuncao'] : "" ?>">
+                                <label >Matriculo - codUsuario</label>
+                                <input name="codigo" type="text" class="form-control" 
+                                value="<?php echo isset($funcao) ? $funcao['codigo'] : "" ?>">
                             </div>
+ 
+
+                            <div class="form-group">
+                                <label>Descrição Função</label>
+                                <input name="descricao" type="text" class="form-control" 
+                                value="<?php echo isset($funcao) ? $funcao['descricao'] : "" ?>">
+                            </div>
+
 
                             <button name="enviar" type="submit" class="btn btn-primary">Enviar</button>
                         </form>
@@ -89,16 +99,16 @@ if (!empty($_GET['codigoAltProfissao'])) {
                             <tbody>
                                 <!-- listando todos usuario -->
                                 <?php
-                                $query = "SELECT * FROM tfuncoes";
+                                $query = "SELECT * FROM funcoes";
                                 $dados = mysqli_query($con, $query);
 
                                 while ($linha = mysqli_fetch_assoc($dados)) {
                                 ?>
 
                                     <tr>
-                                        <td> <?php echo $linha['descricaoFuncao']; ?> </td>
-                                        <td> <a href="profissao.php?codigoAltProfissao=<?= $linha['codigoFuncao']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
-                                        <td> <a href="<?php echo "./profissao/excluirProfissao.php?codigoFuncao=" . $linha['codigoFuncao']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
+                                        <td> <?php echo $linha['descricao']; ?> </td>
+                                        <td> <a href="profissao.php?codigoAltProfissao=<?= $linha['id']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
+                                        <td> <a href="<?php echo "./profissao/excluirProfissao.php?id=" . $linha['id']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
                                     </tr>
 
                                 <?php  } ?>

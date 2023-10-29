@@ -70,7 +70,7 @@ if (!empty($_GET['codigoAltFuncionario'])) {
 
                             <div class="form-group">
                                 <label for="nomeFuncionario"> Nome do Funcionário </label>
-                                <select class="form-control">
+                                <select name="funcao" class="form-control">
                                     <option value="">Selecione</option>
 
                                     <?php

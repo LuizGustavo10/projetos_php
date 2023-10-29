@@ -3,16 +3,18 @@
     include '../conexao.php';
     
     //dados do filme a ser inserido
-    $nomeFuncionario 	=	$_REQUEST['nomeFuncionario'];
-	$codigoFuncionario	=	$_REQUEST['codigoFuncionario'];
+    $nome 				=	$_REQUEST['nome'];
+	$codigo				=	$_REQUEST['codigo'];
 	$salario			=	$_REQUEST['salario'];
 	$dataNascimento		=	$_REQUEST['dataNascimento'];
 	$funcao				=	$_REQUEST['funcao'];
+	$cpf			    =	$_REQUEST['cpf'];
+    $senha				=	$_REQUEST['senha'];
 
 	
 	//query
-    $query = "INSERT INTO localdb.tfuncionario (codigoFuncionario, nomeFuncionario, salario, dataNascimento, funcao)
-    VALUES ('$codigoFuncionario', '$nomeFuncionario', '$salario', '$dataNascimento','$funcao')";
+    $query = "INSERT INTO aulacerta.funcionario (codigo, nome, salario, dataNascimento, funcao, cpf, senha)
+    VALUES ('$codigo', '$nome', '$salario', '$dataNascimento','$funcao','$cpf','$senha')";
         
 		
 	$resultado = mysqli_query($con, $query) or die ("erro em inserir no banco!!!");	

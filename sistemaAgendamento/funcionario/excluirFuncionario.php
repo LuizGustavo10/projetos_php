@@ -4,10 +4,10 @@
     include '../conexao.php';
     
     //dados do funcionario a ser inserido 
-	$codigo		=	$_REQUEST['codigoFuncionario'];
+	$id		=	$_REQUEST['id'];
 
 	//query
-	$query = "DELETE FROM tfuncionario WHERE tfuncionario.codigoFuncionario=".$codigo;
+	$query = "DELETE FROM funcionario WHERE id=".$id;
 
 	$resultado = mysqli_query($con, $query) or die ("erro em excluir dado no banco!");
 	header('Location:../funcionario.php');
