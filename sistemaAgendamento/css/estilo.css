@@ -1,0 +1,75 @@
+.fundo{
+    background-color: #004A8D;
+}
+.painel{
+    width: 500px;
+    margin: auto;
+    box-shadow: 2px 2px 10px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 60px;
+    background-color: white;
+
+}
+
+.usuario{
+    padding-left: 180px;
+    font-size: 100px;
+}
+
+.card{
+    box-shadow: 2px 2px 10px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.card:hover{
+    background-color: rgb(233, 233, 233);
+    transition: 1s;
+}
+
+/* Estilos para o menu lateral */
+.menu {
+    min-width: 250px;
+    background-color: #00396e;
+    color: #fff;
+    height: 100vh; /* Altura 100% da viewport */
+    list-style: none;
+    
+    
+}
+
+/* Estilos para os itens do menu */
+.menu-item {
+    display: block;
+    padding: 10px 20px;
+    margin-left: -50px;
+    font-style: none;
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid white;
+   margin-top: 10px;
+   border-radius: 10px;
+  
+   
+}
+
+/* Estilos para o item selecionado */
+.menu-item:hover {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    color: #004A8D;
+    transition: 1s;
+    text-decoration: none;
+}
+
+@media (max-width: 999px) {
+    .menu {
+        display: none;
+    }
+}
+
+.barra{
+    background-color: #004A8D !important;
+}
