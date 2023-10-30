@@ -16,7 +16,7 @@
           <a class="dropdown-item" href="principal.php">Principal</a>
           <a class="dropdown-item" href="profissao.php">Função</a>
           <a class="dropdown-item" href="funcionario.php">Funcionário</a>
-          <a class="dropdown-item" href="cadastroAgenda.php">Cadastrar Agenda</a>
+          <a class="dropdown-item" href="agenda.php">Cadastrar Agenda</a>
           <a class="dropdown-item" href="listaAgenda.php">Visualizar Agenda</a>
           <a class="dropdown-item" href="sair.php">Sair</a>
          

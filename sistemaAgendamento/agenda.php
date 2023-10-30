@@ -4,20 +4,20 @@ include 'conexao.php';
 include 'validaAutenticacao.php';
 
 
-$destino = "./funcionario/inserirFuncionario.php";
+$destino = "./agenda/inserirAgenda.php";
 $tituloFormulario = "Incluir Funcionário";
 
 
-if (!empty($_GET['codigoAltFuncionario'])) {
-    $id = $_GET['codigoAltFuncionario'];
-    $query = "SELECT * FROM funcionario WHERE id=" . $id;
+if (!empty($_GET['codigoAltAgenda'])) {
+    $id = $_GET['codigoAltAgenda'];
+    $query = "SELECT * FROM agenda WHERE id=" . $id;
     $dados = mysqli_query($con, $query);
-    $funcionario = mysqli_fetch_assoc($dados);
+    $agenda = mysqli_fetch_assoc($dados);
 
-    $destino = "./funcionario/alterarFuncionario.php";
-    $tituloformulario = "Alterar Funcionario";
+    $destino = "./agenda/alterarAgenda.php";
+    $tituloformulario = "Alterar Agenda";
 
-    $oculto = '<input type="hidden" name="codigoFuncionario" value="'.$id.'"/>';
+    $oculto = '<input type="hidden" name="id" value="'.$id.'"/>';
 }
 
 
@@ -57,81 +57,87 @@ if (!empty($_GET['codigoAltFuncionario'])) {
 
                 <div class="row">
 
-                    <div class="col-md-5 card">
+                    <div class="col-md-3 card">
                         <form action="<?= $destino; ?>" method="POST">
-                            <h3>Cadastro de Funcionários</h3>
+                            <h3>Cadastro de Agenda</h3>
 
                             <div class="form-group">
                                 <label>ID</label>
-                                <input disabled name="id" type="text" class="form-control"
-                                value="<?php echo isset($funcionario) ? $funcionario['id'] : ""; ?>">
+                                <input name="id" type="text" class="form-control"
+                                value="<?php echo isset($agenda) ? $agenda['id'] : ""; ?>">
                             </div>
 
                             <div class="form-group">
-                                <label>Nome do Funcionário</label>
-                                <input name="nome" type="text" class="form-control"
-                                value="<?php echo isset($funcionario) ? $funcionario['nome'] : ""; ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label> Nome da profissão </label>
-                                <select class="form-control" name="funcao">
+                                <label> Funcionário </label>
+                                <select class="form-control" name="funcionario">
                                 <option value="">Selecione</option>
 
                                     <?php
-                                        $query = "SELECT * FROM funcoes";
+                                        $query = "SELECT * FROM funcionario";
                                         $dados = mysqli_query($con, $query);
-                                        echo $funcionario['funcao'];
+                                        echo $agenda['funcionario'];
 
                                         while($linha = mysqli_fetch_assoc($dados)){
-                                            echo "<option value='".$linha['id']."' >" .$linha['descricao']. "</option>";
+                                            echo "<option value='".$linha['id']."' >" .$linha['nome']. "</option>";
                                         }
                                     ?>
+
                                 </select>
+
                             </div>
 
 
                             <div class="form-group">
-                                <label> Salário </label>
-                                <input name="salario" type="text" class="form-control"
-                                value="<?php echo isset($funcionario) ? $funcionario['salario'] : ""; ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label> Matricula do Funcionario </label>
-                                <input name="codigo" type="text" class="form-control" 
-                                value="<?php echo isset($funcionario) ? $funcionario['codigo'] : ""; ?>">
+                                <label> Data </label>
+                                <input name="data" type="date" class="form-control" 
+                                value="<?php echo isset($agenda) ? $agenda['data'] : ""; ?>">
                             </div>
                             
                             <div class="form-group">
-                                <label>Data de Nascimento </label>
-                                <input name="dataNascimento" type="date" class="form-control"
-                                value="<?php echo isset($funcionario) ? $funcionario['dataNascimento'] : ""; ?>">
+                                <div class="row">
+                                        <div class="col">
+                                            <label> Hora Inicio </label>
+                                            <input name="hora_inicio" type="time" class="form-control"
+                                            value="<?php echo isset($agenda) ? $agenda['hora_inicio'] : ""; ?>">
+                                        </div>
+                                        <div class="col">
+                                            <label> Hora Fim </label>
+                                            <input name="hora_fim" type="time" class="form-control"
+                                            value="<?php echo isset($agenda) ? $agenda['hora_fim'] : ""; ?>">
+                                        </div>
+                                </div>
+          
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label>curso </label>
+                                <input name="curso" type="text" class="form-control"
+                                value="<?php echo isset($agenda) ? $agenda['curso'] : ""; ?>">
                             </div>
 
                             <div class="form-group">
-                                <label>cpf </label>
-                                <input name="cpf" type="text" class="form-control"
-                                value="<?php echo isset($funcionario) ? $funcionario['cpf'] : ""; ?>">
-                            </div>
-
-                            <div class="form-group">
-                                <label>Data de Nascimento </label>
-                                <input name="senha" type="text" class="form-control"
-                                value="<?php echo isset($funcionario) ? $funcionario['senha'] : ""; ?>">
+                                <label>Observação </label>
+                                <input name="obs" type="text" class="form-control"
+                                value="<?php echo isset($agenda) ? $agenda['obs'] : ""; ?>">
                             </div>
 
                             <button name="enviar" type="submit" class="btn btn-primary">Enviar</button>
                         </form>
                     </div>
 
-                    <div class="col-md-5 card">
+                    <div class="col-md-8 card">
 
                         <table class="table table-hover" id="tabela">
 
                             <thead>
                                 <tr>
-                                    <th scope="col" class="col-8">Funcionário</th>
+                                    <th scope="col" >Funcionário</th>
+                                    <th scope="col" >Data</th>
+                                    <th scope="col" >Hora Inicio</th>
+                                    <th scope="col" >Hora Fim</th>
+                                    <th scope="col">horas</th>
                                     <th scope="col">Alterar</th>
                                     <th scope="col">Excluir</th>
                                 </tr>
@@ -140,7 +146,11 @@ if (!empty($_GET['codigoAltFuncionario'])) {
                             <tbody>
                                 <!-- listando todos usuario -->
                                 <?php
-                                $query = "SELECT * FROM funcionario";
+                                $query = "SELECT *, funcionario.nome AS nome, agenda.id as id FROM agenda
+                                INNER JOIN funcionario
+                                ON funcionario.id = agenda.funcionario
+                                ";
+
                                 $dados = mysqli_query($con, $query);
 
                                 while ($linha = mysqli_fetch_assoc($dados)) {
@@ -148,8 +158,12 @@ if (!empty($_GET['codigoAltFuncionario'])) {
 
                                     <tr>
                                         <td> <?php echo $linha['nome']; ?> </td>
-                                        <td> <a href="funcionario.php?codigoAltFuncionario=<?= $linha['id']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
-                                        <td> <a href="<?php echo "./funcionario/excluirFuncionario.php?id=" . $linha['id']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
+                                        <td> <?php echo $linha['data']; ?> </td>
+                                        <td> <?php echo $linha['hora_inicio']; ?> </td>
+                                        <td> <?php echo $linha['hora_fim']; ?> </td>
+                                        <td> <?php echo $linha['horas']; ?> </td>
+                                        <td> <a href="agenda.php?codigoAltAgenda=<?= $linha['id']; ?>"> <i class="fa-solid fa-pen-to-square"></i> </a> </td>
+                                        <td> <a href="<?php echo "./agenda/excluirAgenda.php?id=" . $linha['id']; ?>"> <i class="fa-solid fa-trash"></i> </a></td>
                                     </tr>
 
                                 <?php  } ?>
