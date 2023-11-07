@@ -32,7 +32,8 @@ if (!empty($_GET['codigoAltUsuario'])) {
     <title>Página principal</title>
 
     <link rel="stylesheet" href="css/estilo.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -104,6 +105,7 @@ if (!empty($_GET['codigoAltUsuario'])) {
                             <tbody>
                                 <!-- listando todos usuario -->
                                 <?php
+                                
                                 $query = "SELECT * FROM usuario";
                                 $dados = mysqli_query($con, $query);
 
@@ -122,6 +124,7 @@ if (!empty($_GET['codigoAltUsuario'])) {
  
 
                             </tbody>
+
                         </table>
                     </div>
 
