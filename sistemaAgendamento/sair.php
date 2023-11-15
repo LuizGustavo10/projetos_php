@@ -1,6 +1,6 @@
 <?php
    //finalizar sessão
-    //session_destroy();
+    session_destroy();
  
     //Limpar dados
     unset ($_SESSION['codigoUsuario']);
