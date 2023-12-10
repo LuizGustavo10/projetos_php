@@ -15,10 +15,8 @@ if (!empty($_GET['codigoAltUsuario'])) {
     $usuario = mysqli_fetch_assoc($dados);
 
     $destino = "./usuario/alterarUsuario.php";
-    $tituloformulario = "Alterar Usuario";
+    $tituloformulario = "Alterar Usuario";  
 }
-
-
 
 ?>
 
@@ -53,7 +51,7 @@ if (!empty($_GET['codigoAltUsuario'])) {
 
             <div class="col-md-9">
 
-
+39
                 <div class="row">
                     <div class="col-md card">
                         <form action="<?= $destino; ?>" method="POST">
@@ -61,14 +59,13 @@ if (!empty($_GET['codigoAltUsuario'])) {
 
                             <div class="form-group">
                                 <label>Id </label>
-                                <input disabled name="id" type="text" class="form-control" value="<?php echo isset($usuario) ? $usuario['id'] : "" ?>">
+                                <input name="id" type="hidden" class="form-control" value="<?php echo isset($usuario) ? $usuario['id'] : "" ?>">
                             </div>
 
                             <div class="form-group">
                                 <label>Matriculo - codUsuario</label>
                                 <input name="codigo" type="text" class="form-control" value="<?php echo isset($usuario) ? $usuario['codigo'] : "" ?>">
                             </div>
- 
 
                             <div class="form-group">
                                 <label>Nome Usuário</label>

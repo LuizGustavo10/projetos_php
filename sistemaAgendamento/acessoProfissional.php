@@ -1,0 +1,30 @@
+<?php
+
+    include 'conexao.php';
+
+    $codigoUsuario = $_REQUEST['codigoUsuario'];
+    $senhaUsuario = $_REQUEST['senhaUsuario'];
+
+    $query = "SELECT * FROM funcionario WHERE cpf = '$codigoUsuario' 
+    AND senha = '$senhaUsuario'";
+
+    $resultado = mysqli_query($con, $query) or die("Erro ao acessar o usuário!");
+
+    //busca uma linha especifica da busca sql- carrega registro
+    $linha = mysqli_fetch_assoc($resultado);
+
+    if(mysqli_num_rows($resultado) > 0){
+        session_start();
+        $_SESSION['instrutor'] = $linha['nome'];
+        $_SESSION['cpf'] = $codigoUsuario;
+        $_SESSION['senha'] = $senhaUsuario;
+
+        header('location: agendaInstrutor.php');
+    }else{
+        session_unset();
+        session_destroy();
+        header('location: loginInstrutor.php');
+        
+    }
+
+?>

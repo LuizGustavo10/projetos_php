@@ -31,22 +31,22 @@ include 'validaAutenticacao.php';
             <div class="container-fluid">
 
                 <div class="row">
+
                     <div class="col-md-3 menu">
-                    
                         <?php include 'menu.php' ?>
-                    
                     </div>
+
                     <div class="col-md-9">
 
-
-                    <div class="opcoes-visualizacao">
+                <div class="opcoes-visualizacao">
                     <label for="visualizacao">Escolha a visualização:</label>
                     <select id="visualizacao" class="form-control">
                         <option value="dayGridMonth">Mês</option>
                         <option value="timeGridWeek">Semana</option>
                         <option value="timeGridDay">Dia</option>
-                    </select>
+                    </select> 
                 </div>
+
 
         <?php
             // Recupere os eventos da tabela 'agendamentos'
@@ -57,7 +57,13 @@ include 'validaAutenticacao.php';
                 die("Falha na conexão com o banco de dados: " . $con->connect_error);
             }
 
-            $sql = "SELECT agenda.id AS id, funcionario.nome AS funcionario, data, hora_inicio, hora_fim FROM agenda
+            $sql = "SELECT agenda.id AS id, 
+            funcionario.nome AS funcionario, 
+            data,
+            hora_inicio,
+            hora_fim 
+              
+              FROM agenda
             INNER JOIN funcionario
             ON funcionario.id = agenda.funcionario";
 
@@ -112,7 +118,7 @@ include 'validaAutenticacao.php';
                 }
             },
             timeZone: 'local', // Configurar para o fuso horário local
-        });
+            });
             calendar.render();
 
             // Selecionar visualização
